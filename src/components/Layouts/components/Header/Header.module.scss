@@ -8,4 +8,86 @@
 .inner {
     height: 100%;
     width: var(--container-width);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrapper-search {
+    position: relative;
+    width: 361px;
+}
+.search {
+    position: relative;
+    width: 361px;
+    height: 46px;
+    border-radius: 92px;
+    border: 1.5px solid transparent;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    background-color: var(--bg-search-color);
+    &-input {
+        flex: 1;
+        font-size: 1.6rem;
+        padding: 0 16px;
+        background-color: transparent;
+        color: var(--text-color);
+        caret-color: var(--primary-color);
+        &:not(:placeholder-shown) ~ .search-btn {
+            color: rgba(22, 24, 35, 0.75);
+        }
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 9px;
+        right: 52px;
+        z-index: 1;
+        width: 1px;
+        height: 28px;
+        background-color: rgba(22, 24, 35, 0.34);
+    }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+    &-status {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 62px;
+        color: rgba(22, 24, 35, 0.34);
+        font-size: 1.6rem;
+        &-loading {
+            display: none;
+        }
+        &-clear {
+            display: none;
+        }
+    }
+    &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 17px;
+        font-size: 1.8rem;
+        color: rgba(22, 24, 35, 0.34);
+        background-color: transparent;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(22, 24, 35, 0.03);
+        }
+        &:active {
+            background-color: rgba(22, 24, 35, 0.06);
+        }
+    }
+    &-result {
+        position: relative;
+        width: 361px;
+    }
+    &-title {
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: rgba(22, 24, 35, 0.5);
+        padding: 4px 16px;
+    }
 }
