@@ -1,0 +1,22 @@
+.menu-list {
+    width: 224px;
+    .menu-item {
+        width: 100%;
+        text-align: left;
+        margin-left: 0px;
+        display: block;
+        padding: 13px 20px;
+        background: transparent;
+        font-size: 1.6rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: segoe ui light;
+        &:hover {
+            background: rgba(22, 24, 35, 0.03);
+        }
+    }
+}
+
+.menu-popper {
+    padding-bottom: 8px;
+}

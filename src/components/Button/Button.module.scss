@@ -55,14 +55,20 @@
 }
 
 // Button Sizes
-
 .sizeM {
     min-width: 110px;
     padding: 6px 16px;
+}
+.fullWidth {
+    width: 100%;
 }
 
 // Button Icons
 .icon + .title,
 .title + .icon {
     margin-left: 8px;
+}
+.icon {
+    display: inline-block;
+    width: 18px;
 }

@@ -40,7 +40,7 @@
     &::after {
         content: '';
         position: absolute;
-        top: 9px;
+        top: 8px;
         right: 52px;
         z-index: 1;
         width: 1px;
@@ -92,8 +92,15 @@
     }
 }
 
-// Icons style
+.actions {
+    display: flex;
+    align-items: center;
+}
 
-// .upload-icon {
-//     padding-right: 10px;
-// }
+.menu {
+    padding: 4px 12px;
+    margin: 0 12px;
+    font-size: 1.8rem;
+    background: transparent;
+    cursor: pointer;
+}

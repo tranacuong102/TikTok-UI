@@ -11,6 +11,7 @@ function Button({
     link,
     disable,
     sizeM,
+    fullWidth,
     to,
     href,
     children,
