@@ -4,13 +4,42 @@ import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button({ to, href, children, onClick, primary }) {
-    const classes = cx('btn', {
-        primary,
-    });
+function Button({
+    primary,
+    outline,
+    rounded,
+    link,
+    disable,
+    sizeM,
+    to,
+    href,
+    children,
+    leftIcon,
+    onClick,
+    ...passProps
+}) {
     const props = {
         onClick,
+        ...passProps,
     };
+    const classes = cx('btn', {
+        primary,
+        outline,
+        rounded,
+        link,
+        sizeM,
+        disable,
+    });
+
+    // Remove events listener when btn is disable
+    if (disable) {
+        Object.keys(props).forEach((key) => {
+            if (key.startsWith('on') && typeof props[key] === 'function') {
+                delete props[key];
+            }
+        });
+    }
+
     let CompStyle = 'button';
 
     if (to) {
@@ -23,7 +52,8 @@ function Button({ to, href, children, onClick, primary }) {
 
     return (
         <CompStyle className={classes} {...props}>
-            <span>{children}</span>
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+            <span className={cx('title')}>{children}</span>
         </CompStyle>
     );
 }
