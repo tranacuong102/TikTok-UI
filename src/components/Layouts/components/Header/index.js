@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 import Tippy from '@tippyjs/react/headless';
+import TippyToolTip from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,7 +14,11 @@ import {
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
+    faCoins,
+    faGear,
+    faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faMessage, faUser } from '@fortawesome/free-regular-svg-icons';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
@@ -28,6 +34,21 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
         title: 'English',
+        children: {
+            title: 'Languages',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
@@ -40,8 +61,46 @@ const MENU_ITEMS = [
     },
 ];
 
+const USER_MENU = [
+    {
+        icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
+        title: 'View Profile',
+        to: '/@username',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
+        title: 'Get Coins',
+        to: '/coin',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
+        title: 'Settings',
+        to: '/settings',
+    },
+    ...MENU_ITEMS,
+    {
+        icon: <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>,
+        title: 'Log out',
+        to: '/logout',
+        separate: true,
+    },
+];
+
 function Header() {
     const [searchResult, setSearchResult] = useState('');
+
+    // Handle Logic
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                console.log(menuItem);
+                break;
+            default:
+                throw new Error('Invalid type');
+        }
+    };
+
+    const userLogin = true;
 
     return (
         <header className={cx('wrapper')}>
@@ -85,12 +144,43 @@ function Header() {
                     <Button link to="./upload" sizeM leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                         Upload
                     </Button>
-                    <Button primary>Login</Button>
-                    <Menu items={MENU_ITEMS}>
-                        <div className={cx('menu')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </div>
-                    </Menu>
+                    {userLogin ? (
+                        <>
+                            <div className={cx('actions-btns')}>
+                                <TippyToolTip delay={[0, 300]} content="Message" placement="bottom">
+                                    <button className={cx('actions-btn')}>
+                                        <FontAwesomeIcon icon={faMessage} />
+                                    </button>
+                                </TippyToolTip>
+                                <TippyToolTip content="Inbox" placement="bottom">
+                                    <button className={cx('actions-btn')}>
+                                        <FontAwesomeIcon icon={faEnvelope} />
+                                    </button>
+                                </TippyToolTip>
+                            </div>
+                            <Menu items={USER_MENU} onChange={handleMenuChange}>
+                                <div className={cx('avatar')}>
+                                    <img
+                                        className={cx('avatar-user')}
+                                        src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7105171291010760709~c5_100x100.jpeg?x-expires=1654473600&x-signature=f6DBxH90RoVLSqB1VsrRkzPQrZE%3D"
+                                        alt="Trần Anh Cường"
+                                    />
+                                </div>
+                            </Menu>
+                        </>
+                    ) : (
+                        <>
+                            <Button link to="./upload" sizeM leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                                Upload
+                            </Button>
+                            <Button primary>Login</Button>
+                            <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                                <div className={cx('menu')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </div>
+                            </Menu>
+                        </>
+                    )}
                 </div>
             </div>
         </header>

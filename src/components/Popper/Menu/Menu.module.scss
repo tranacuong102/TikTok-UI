@@ -2,6 +2,7 @@
     width: 224px;
     .menu-item {
         width: 100%;
+        line-height: 1.8rem;
         text-align: left;
         margin-left: 0px;
         display: block;
@@ -11,6 +12,11 @@
         font-weight: 600;
         cursor: pointer;
         font-family: segoe ui light;
+
+        &.separate {
+            border-top: 1px solid rgba(22, 24, 35, 0.12);
+        }
+
         &:hover {
             background: rgba(22, 24, 35, 0.03);
         }
@@ -19,4 +25,23 @@
 
 .menu-popper {
     padding-bottom: 8px;
+}
+
+// Sub Menu Languages
+.header {
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+}
+.back-btn {
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
