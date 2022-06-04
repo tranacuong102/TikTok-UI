@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Tippy from '@tippyjs/react/headless';
 import TippyToolTip from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-
+import Search from '../Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
     faPlus,
     faEllipsisVertical,
     faEarthAsia,
@@ -19,12 +16,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
 import images from '~/assets/images';
-import AccountItem from '~/components/AccountItem';
+
 import Menu from '~/components/Popper/Menu';
-import { InboxIcon, MessageIcon, SearchIcon } from '~/components/Icon';
+import { InboxIcon, MessageIcon } from '~/components/Icon';
 import Image from '~/components/Image';
 
 import classNames from 'classnames/bind';
@@ -88,8 +84,6 @@ const USER_MENU = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState('');
-
     // Handle Logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -106,41 +100,12 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="TikTok" />
-                <div className={cx('wrapper-search')}>
-                    <Tippy
-                        visible={searchResult !== ''}
-                        interactive
-                        render={(attrs) => (
-                            <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                                <PopperWrapper>
-                                    <h4 className={cx('search-title')}>Accounts</h4>
-                                    <AccountItem />
-                                    <AccountItem />
-                                </PopperWrapper>
-                            </div>
-                        )}
-                    >
-                        <div className={cx('search')}>
-                            <input
-                                type="text"
-                                className={cx('search-input')}
-                                placeholder="Search accounts and videos"
-                                spellCheck="false"
-                                value={searchResult}
-                                onChange={(e) => setSearchResult(e.target.value)}
-                            />
-                            <div className={cx('search-status')}>
-                                <FontAwesomeIcon className={cx('search-status-loading')} icon={faSpinner} />
-                                <FontAwesomeIcon className={cx('search-status-clear')} icon={faCircleXmark} />
-                            </div>
+                <Link to="/">
+                    <img src={images.logo} alt="TikTok" />
+                </Link>
 
-                            <div className={cx('search-btn')}>
-                                <SearchIcon />
-                            </div>
-                        </div>
-                    </Tippy>
-                </div>
+                <Search />
+
                 <div className={cx('actions')}>
                     <Button link to="./upload" sizeM leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                         Upload
