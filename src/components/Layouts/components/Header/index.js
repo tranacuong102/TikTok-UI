@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faPlus,
     faEllipsisVertical,
     faEarthAsia,
@@ -18,16 +17,18 @@ import {
     faGear,
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope, faMessage, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
-
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import { InboxIcon, MessageIcon, SearchIcon } from '~/components/Icon';
+import Image from '~/components/Image';
+
+import classNames from 'classnames/bind';
+import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -135,7 +136,7 @@ function Header() {
                             </div>
 
                             <div className={cx('search-btn')}>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                <SearchIcon />
                             </div>
                         </div>
                     </Tippy>
@@ -149,21 +150,22 @@ function Header() {
                             <div className={cx('actions-btns')}>
                                 <TippyToolTip delay={[0, 300]} content="Message" placement="bottom">
                                     <button className={cx('actions-btn')}>
-                                        <FontAwesomeIcon icon={faMessage} />
+                                        <MessageIcon />
                                     </button>
                                 </TippyToolTip>
                                 <TippyToolTip content="Inbox" placement="bottom">
                                     <button className={cx('actions-btn')}>
-                                        <FontAwesomeIcon icon={faEnvelope} />
+                                        <InboxIcon />
                                     </button>
                                 </TippyToolTip>
                             </div>
                             <Menu items={USER_MENU} onChange={handleMenuChange}>
                                 <div className={cx('avatar')}>
-                                    <img
+                                    <Image
                                         className={cx('avatar-user')}
                                         src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7105171291010760709~c5_100x100.jpeg?x-expires=1654473600&x-signature=f6DBxH90RoVLSqB1VsrRkzPQrZE%3D"
                                         alt="Trần Anh Cường"
+                                        fallback={images.noAvatar}
                                     />
                                 </div>
                             </Menu>
