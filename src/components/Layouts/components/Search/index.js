@@ -5,6 +5,8 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icon';
+import { useDebounce } from '~/hooks';
+
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -16,17 +18,19 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
+    const debounced = useDebounce(searchValue, 800);
+
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced) {
             setSearchResult([]);
             return;
         }
 
         setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
             .then((response) => response.json())
             .then((response) => {
                 setSearchResult(response.data);
@@ -35,7 +39,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClearSearchValue = () => {
         setSearchValue('');
@@ -45,6 +49,14 @@ function Search() {
 
     const handleHideResult = () => {
         setShowResult(false);
+    };
+
+    const handleSetSearchValue = (e) => {
+        if (e.target.value.startsWith(' ')) {
+            return;
+        } else {
+            setSearchValue(e.target.value);
+        }
     };
 
     return (
@@ -72,7 +84,7 @@ function Search() {
                         placeholder="Search accounts and videos"
                         spellCheck="false"
                         value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={(e) => handleSetSearchValue(e)}
                         onFocus={() => setShowResult(true)}
                     />
                     <div className={cx('search-status')}>
