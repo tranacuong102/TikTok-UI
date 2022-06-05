@@ -25,7 +25,7 @@ function Search() {
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounced) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
@@ -49,11 +49,12 @@ function Search() {
         setShowResult(false);
     };
 
-    const handleSetSearchValue = (e) => {
-        if (e.target.value.startsWith(' ')) {
+    const handleChangeValue = (e) => {
+        const valueSearch = e.target.value;
+        if (valueSearch.startsWith(' ')) {
             return;
         } else {
-            setSearchValue(e.target.value);
+            setSearchValue(valueSearch);
         }
     };
 
@@ -82,7 +83,7 @@ function Search() {
                         placeholder="Search accounts and videos"
                         spellCheck="false"
                         value={searchValue}
-                        onChange={(e) => handleSetSearchValue(e)}
+                        onChange={handleChangeValue}
                         onFocus={() => setShowResult(true)}
                     />
                     <div className={cx('search-status')}>

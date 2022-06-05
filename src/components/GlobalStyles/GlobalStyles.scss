@@ -40,6 +40,7 @@
     --header-height: 60px;
     --container-width: 1150px;
     --horizontal-spacer: 24px;
+    --font-family: 'ProximaNova', sans-serif;
 }
 
 * {
@@ -53,7 +54,7 @@ html {
 }
 
 body {
-    font-family: 'ProximaNova', sans-serif;
+    font-family: var(--font-family);
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
