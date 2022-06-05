@@ -45,13 +45,13 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
                     <PopperWrapper className={cx('menu-popper')}>
                         {page.length > 1 && (
                             <Header
-                                title="Languages"
+                                title="Language"
                                 onBack={() => {
                                     setPage((prev) => prev.slice(0, prev.length - 1));
                                 }}
                             />
                         )}
-                        {renderMenuItems()}
+                        <div className={cx('menu-body')}>{renderMenuItems()}</div>
                     </PopperWrapper>
                 </div>
             )}
