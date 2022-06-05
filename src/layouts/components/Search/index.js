@@ -66,10 +66,13 @@ function Search() {
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
+                            <div className={cx('search-title')}>Accounts</div>
                             {searchResult.map((result) => (
                                 <AccountItem key={result.id} data={result} />
                             ))}
+                            {searchValue && (
+                                <h4 className={cx('search-results')}>View all results for "{searchValue}"</h4>
+                            )}
                         </PopperWrapper>
                     </div>
                 )}

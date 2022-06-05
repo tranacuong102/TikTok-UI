@@ -65,13 +65,23 @@
         width: 361px;
     }
     &-title {
-        font-weight: 600;
+        font-weight: 500;
         font-size: 1.4rem;
         color: rgba(22, 24, 35, 0.5);
         padding: 4px 16px;
+        user-select: none;
+        cursor: text;
+    }
+    &-results {
+        padding: 12px 20px;
+        font-family: 'Sofiapro', sans-serif;
+        font-weight: 400;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(22, 24, 35, 0.03);
+        }
     }
 }
-
 // Animation
 .search-status-loading {
     animation: spinner 1s linear infinite;

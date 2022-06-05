@@ -4,12 +4,26 @@ function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
     useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
-        return () => {
-            return clearTimeout(handler);
-        };
+        if (value.includes('  ')) {
+            const fixValue = value.split(' ');
+            const configValue = fixValue.filter((str) => {
+                return str !== '';
+            });
+            const result = configValue.join(' ');
+            const handler = setTimeout(() => {
+                setDebouncedValue(result);
+            }, delay);
+            return () => {
+                return clearTimeout(handler);
+            };
+        } else {
+            const handler = setTimeout(() => {
+                setDebouncedValue(value);
+            }, delay);
+            return () => {
+                return clearTimeout(handler);
+            };
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
